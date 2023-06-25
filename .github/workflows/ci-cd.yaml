@@ -3,22 +3,20 @@ run-name: Running CI/CD
 on: [push]
 env:
   sppkgPath: sharepoint/solution/trust-365.sppkg
+  node-version: 16
 jobs:
   ci:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16]
 
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
           version: 8
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
       - name: Install deps, test, build and package
         run: |
@@ -39,7 +37,7 @@ jobs:
     steps:
       - name: Download sppkg
         uses: actions/download-artifact@v3
-      - run: ls -lR
+      - run: ls
 
       - name: Deploy to app tenant
         id: PnPPowerShellDeploy
