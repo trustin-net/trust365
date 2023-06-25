@@ -1,9 +1,9 @@
 name: ci-cd
-
+run-name: Running CI/CD
 on: [push]
 
 jobs:
-  setup:
+  ci:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,12 +21,6 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install
+      - name: Run test
+        run: pnpm test
 
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16]
-    needs: [setup]
-    steps:
-      - run: pnpm test
