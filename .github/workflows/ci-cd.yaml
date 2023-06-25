@@ -39,13 +39,25 @@ jobs:
       - name: Download sppkg
         uses: actions/download-artifact@v3
 
-      - name: Deploy to app tenant
-        id: PnPPowerShellDeploy
-        uses: aakashbhardwaj619/action-pnp-powershell-deploy@v1.0.0
+      - name: Login to tenant
+        uses: pnp/action-cli-login@v2.0.0
         with:
-          SHAREPOINT_SITE_URL: ${{ env.siteUrl }}
           ADMIN_USERNAME: ${{ secrets.ADMINUSERNAME }}
           ADMIN_PASSWORD: ${{ secrets.ADMINPASSWORD }}
+      - name: Deploy to tenant
+        uses: pnp/action-cli-deploy@v2.0.0
+        with:
           APP_FILE_PATH: package/trust-365.sppkg
           SKIP_FEATURE_DEPLOYMENT: true
           OVERWRITE: true
+
+      # - name: Deploy to app tenant
+      #   id: PnPPowerShellDeploy
+      #   uses: aakashbhardwaj619/action-pnp-powershell-deploy@v1.0.0
+      #   with:
+      #     SHAREPOINT_SITE_URL: ${{ env.siteUrl }}
+      #     ADMIN_USERNAME: ${{ secrets.ADMINUSERNAME }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMINPASSWORD }}
+      #     APP_FILE_PATH: package/trust-365.sppkg
+      #     SKIP_FEATURE_DEPLOYMENT: true
+      #     OVERWRITE: true
