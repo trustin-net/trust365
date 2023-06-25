@@ -24,7 +24,7 @@ jobs:
           gulp test
           gulp bundle --ship
           gulp package-solution --ship
-      - name: Archive sppkg
+      - name: Upload sppkg
         uses: actions/upload-artifact@v3
         with:
           name: package
@@ -36,6 +36,9 @@ jobs:
     env:
       siteUrl: https://trustinnet.sharepoint.com/sites/intranet/
     steps:
+      - name: Download sppkg
+        uses: actions/download-artifact@v3
+
       - name: Deploy to app tenant
         id: PnPPowerShellDeploy
         uses: aakashbhardwaj619/action-pnp-powershell-deploy@v1.0.0
