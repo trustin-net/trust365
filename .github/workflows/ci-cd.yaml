@@ -19,12 +19,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-      - name: Install deps
-        run: pnpm install
-      - name: Run test
-        run: pnpm test
-      - name: Bundle
-        run: pnpm bundle --ship
-      - name: Pacakge
-        run: pnpm package --ship
+      - name: Install deps, test, build and package
+        run: |
+          pnpm install
+          pnpm test
+          pnpm bundle --ship
+          pnpm package --ship
+      - name: Archive sppkg
+        uses: actions/upload-artifact@v3
+        with:
+          name: trust365.sppkg
+          path: ./sharepoint/solution/trust-365.sppkg
 
