@@ -23,9 +23,9 @@ jobs:
       - name: Install deps, test, build and package
         run: |
           pnpm install
-          pnpm test
-          pnpm bundle --ship
-          pnpm package --ship
+          gulp test
+          gulp bundle --ship
+          gulp package-solution --ship
       - name: Archive sppkg
         uses: actions/upload-artifact@v3
         with:
@@ -39,6 +39,7 @@ jobs:
     steps:
       - name: Download sppkg
         uses: actions/download-artifact@v3
+      - run: ls -lR
 
       - name: Deploy to app tenant
         id: PnPPowerShellDeploy
