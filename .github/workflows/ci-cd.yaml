@@ -23,4 +23,8 @@ jobs:
         run: pnpm install
       - name: Run test
         run: pnpm test
+      - name: Bundle
+        run: pnpm bundle --ship
+      - name: Pacakge
+        run: pnpm package --ship
 

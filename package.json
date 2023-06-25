@@ -10,7 +10,9 @@
     "build": "gulp bundle",
     "clean": "gulp clean",
     "test": "gulp test",
-    "serve": "gulp serve"
+    "serve": "gulp serve",
+    "bundle": "gulp bundle",
+    "package": "gulp package-solution"
   },
   "dependencies": {
     "tslib": "2.3.1",
