@@ -1,7 +1,8 @@
 name: ci-cd
 run-name: Running CI/CD
 on: [push]
-
+env:
+  sppkgPath: sharepoint/solution/trust-365.sppkg
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -28,8 +29,7 @@ jobs:
       - name: Archive sppkg
         uses: actions/upload-artifact@v3
         with:
-          name: trust365
-          path: ./sharepoint/solution/trust-365.sppkg
+          path: ${{ env.sppkgPath }}
 
   cd:
     needs: ci
@@ -47,6 +47,6 @@ jobs:
           SHAREPOINT_SITE_URL: ${{ env.siteUrl }}
           ADMIN_USERNAME: ${{ secrets.ADMINUSERNAME }}
           ADMIN_PASSWORD: ${{ secrets.ADMINPASSWORD }}
-          APP_FILE_PATH: trust-365.sppkg
+          APP_FILE_PATH: ${{ env.sppkgPath}}
           SKIP_FEATURE_DEPLOYMENT: true
           OVERWRITE: true
