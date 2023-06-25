@@ -5,7 +5,7 @@ env:
   sppkgPath: sharepoint/solution/trust-365.sppkg
   node-version: 16
 jobs:
-  ci:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,9 +30,9 @@ jobs:
           name: package
           path: ${{ env.sppkgPath }}
 
-  cd:
-    needs: ci
-    runs-on: windows-latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download sppkg
@@ -41,9 +41,8 @@ jobs:
       - name: Login to tenant
         uses: pnp/action-cli-login@v2.2.1
         with:
-          TENANT: 006557f5-0221-46e7-8909-d5d0f889a270
           APP_ID: ${{ secrets.APP_ID }}
-          CERTIFICATE_ENCODED: "${{ secrets.CERTIFICATE_ENCODED }}"
+          CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
           # CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       - name: Status
         uses: pnp/action-cli-runscript@v2.0.1
