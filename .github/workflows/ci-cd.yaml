@@ -28,6 +28,25 @@ jobs:
       - name: Archive sppkg
         uses: actions/upload-artifact@v3
         with:
-          name: trust365.sppkg
+          name: trust365
           path: ./sharepoint/solution/trust-365.sppkg
 
+  cd:
+    needs: ci
+    runs-on: windows-latest
+    env:
+      siteUrl: https://trustinnet.sharepoint.com/sites/intranet/
+    steps:
+      - name: Download sppkg
+        uses: actions/download-artifact@v3
+
+      - name: Deploy to app tenant
+        id: PnPPowerShellDeploy
+        uses: aakashbhardwaj619/action-pnp-powershell-deploy@v1.0.0
+        with:
+          SHAREPOINT_SITE_URL: ${{ env.siteUrl }}
+          ADMIN_USERNAME: ${{ secrets.ADMINUSERNAME }}
+          ADMIN_PASSWORD: ${{ secrets.ADMINPASSWORD }}
+          APP_FILE_PATH: trust-365.sppkg
+          SKIP_FEATURE_DEPLOYMENT: true
+          OVERWRITE: true
