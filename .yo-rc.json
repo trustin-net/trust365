@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "packageManager": "pnpm",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.20.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.4",
+    "libraryName": "trust-365",
+    "libraryId": "3f7a2b25-f469-4d59-b103-b45fb17fac81",
+    "environment": "spo",
+    "solutionName": "trust-365",
+    "solutionShortDescription": "trust-365 description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

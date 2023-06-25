@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "trust-365-client-side-solution",
+    "id": "3f7a2b25-f469-4d59-b103-b45fb17fac81",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.4"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "trust-365 description"
+      },
+      "longDescription": {
+        "default": "trust-365 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "trust-365 Feature",
+        "description": "The feature that activates elements of the trust-365 solution.",
+        "id": "315781b0-262f-4802-a3ac-0d5e157c7233",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/trust-365.sppkg"
+  }
+}
