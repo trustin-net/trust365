@@ -21,3 +21,12 @@ jobs:
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+    needs: [setup]
+    steps:
+      - run: pnpm test
