@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Download sppkg
         uses: actions/download-artifact@v3
-      - run: ls
+      - run: ls artifact
 
       - name: Deploy to app tenant
         id: PnPPowerShellDeploy
