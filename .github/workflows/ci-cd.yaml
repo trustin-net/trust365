@@ -37,15 +37,13 @@ jobs:
     steps:
       - name: Download sppkg
         uses: actions/download-artifact@v3
-      - run: ls
-      - run: ls -R
 
       - name: Login to tenant
         uses: pnp/action-cli-login@v2.2.1
         with:
           TENANT: 006557f5-0221-46e7-8909-d5d0f889a270
           APP_ID: ${{ secrets.APP_ID }}
-          CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
+          CERTIFICATE_ENCODED: "${{ secrets.CERTIFICATE_ENCODED }}"
           # CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       - name: Status
         uses: pnp/action-cli-runscript@v2.0.1
