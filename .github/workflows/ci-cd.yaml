@@ -43,18 +43,18 @@ jobs:
         with:
           APP_ID: ${{ secrets.APP_ID }}
           CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
-          # CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-      - name: Status
-        uses: pnp/action-cli-runscript@v2.0.1
-        with:
-          CLI_MICROSOFT365_SCRIPT : m365 status
-          #M365_CLI_SCRIPT: m365 status
-
-
-      # - name: Deploy to tenant
-      #   uses: pnp/action-cli-deploy@v3.0.1
+      #     # CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      # - name: Status
+      #   uses: pnp/action-cli-runscript@v2.0.1
       #   with:
-      #     APP_FILE_PATH: package/trust-365.sppkg
-      #     SKIP_FEATURE_DEPLOYMENT: true
-      #     OVERWRITE: true
+      #     CLI_MICROSOFT365_SCRIPT : m365 status
+      #     #M365_CLI_SCRIPT: m365 status
+
+
+      - name: Deploy to tenant
+        uses: pnp/action-cli-deploy@v3.0.1
+        with:
+          APP_FILE_PATH: package/trust-365.sppkg
+          SKIP_FEATURE_DEPLOYMENT: true
+          OVERWRITE: true
 
