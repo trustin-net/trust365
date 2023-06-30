@@ -1,42 +1,63 @@
 name: ci-cd
-run-name: Running CI/CD
-on: [push]
+
+on:
+  push:
+    tags:
+      - v*
+
 env:
-  sppkgPath: sharepoint/solution/trust-365.sppkg
+  artifactName: sharepoint-package
+  artifactPath: sharepoint/solution
+  sharepointPackageName: trust-365
   node-version: 16
+  pnpm-version: 8
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup PNPM ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: ${{ env.pnpm-version }}
+
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
           cache: 'pnpm'
-      - name: Install deps, test, build and package
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run test
+        run: gulp test
+
+      - name: Ship SharePoint package
         run: |
-          pnpm install
-          gulp test
           gulp bundle --ship
           gulp package-solution --ship
-      - name: Upload sppkg
+
+      - name: Archive SharePoint Package
         uses: actions/upload-artifact@v3
         with:
-          name: package
-          path: ${{ env.sppkgPath }}
+          name: ${{ env.artifactName }}
+          path: ${{ env.artifactPath }}
+          retention-days: 1
 
   deploy:
     needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Download sppkg
+      - name: Download SharePoint Package
         uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.artifactName }}
 
       - name: Login to tenant
         uses: pnp/action-cli-login@v2.2.1
@@ -45,17 +66,11 @@ jobs:
           TENANT: ${{ secrets.TENANT_ID }}
           CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
           CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-      # - name: Status
-      #   uses: pnp/action-cli-runscript@v2.0.1
-      #   with:
-      #     CLI_MICROSOFT365_SCRIPT : m365 status
-      #     #M365_CLI_SCRIPT: m365 status
-
 
       - name: Deploy to tenant
         uses: pnp/action-cli-deploy@v3.0.1
         with:
-          APP_FILE_PATH: package/trust-365.sppkg
+          APP_FILE_PATH: ${{ env.artifactName }}/${{ env.sharepointPackageName }}.sppkg
           SKIP_FEATURE_DEPLOYMENT: true
           OVERWRITE: true
 
