@@ -70,7 +70,7 @@ jobs:
       - name: Deploy to tenant
         uses: pnp/action-cli-deploy@v3.0.1
         with:
-          APP_FILE_PATH: ${{ env.artifactName }}/${{ env.sharepointPackageName }}.sppkg
+          APP_FILE_PATH: ${{ env.sharepointPackageName }}.sppkg
           SKIP_FEATURE_DEPLOYMENT: true
           OVERWRITE: true
 
