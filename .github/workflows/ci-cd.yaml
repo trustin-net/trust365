@@ -2,6 +2,7 @@ name: ci-cd
 
 on:
   push:
+    branches: "*"
     tags:
       - v*
 
@@ -58,6 +59,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ env.artifactName }}
+
+      - run: |
+          ls -lR
 
       - name: Login to tenant
         uses: pnp/action-cli-login@v2.2.1
