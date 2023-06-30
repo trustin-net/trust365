@@ -10,7 +10,6 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'WelcomeUserWebPartStrings';
 import WelcomeUser from './components/WelcomeUser';
-import { IWelcomeUserProps } from './components/IWelcomeUserProps';
 
 export interface IWelcomeUserWebPartProps {
   description: string;
@@ -18,27 +17,15 @@ export interface IWelcomeUserWebPartProps {
 
 export default class WelcomeUserWebPart extends BaseClientSideWebPart<IWelcomeUserWebPartProps> {
 
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
-
   public render(): void {
-    const element: React.ReactElement<IWelcomeUserProps> = React.createElement(
-      WelcomeUser,
-      {
-        description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
-      }
-    );
 
-    ReactDom.render(element, this.domElement);
+
+    ReactDom.render(<WelcomeUser userDisplayName={this.context.pageContext.user.displayName} />, this.domElement);
   }
 
   protected onInit(): Promise<void> {
     return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+      return;
     });
   }
 
@@ -75,7 +62,7 @@ export default class WelcomeUserWebPart extends BaseClientSideWebPart<IWelcomeUs
       return;
     }
 
-    this._isDarkTheme = !!currentTheme.isInverted;
+
     const {
       semanticColors
     } = currentTheme;
