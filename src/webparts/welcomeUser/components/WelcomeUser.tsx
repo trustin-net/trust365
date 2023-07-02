@@ -5,7 +5,7 @@ import * as React from 'react';
 export type WelcomeUserProps = { userDisplayName: string; }
 
 const WelcomeUser: React.FC<WelcomeUserProps> = ({ userDisplayName }) => {
-  return <section>Welcome {userDisplayName}</section>
+  return <section className="text-primary-600 font-bold">Welcome {userDisplayName}</section>
 }
 
 export default WelcomeUser;

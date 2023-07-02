@@ -1,15 +1,17 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
+import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
 
 import * as strings from 'WelcomeUserWebPartStrings';
 import WelcomeUser from './components/WelcomeUser';
+
+import "../../main.css";
 
 export interface IWelcomeUserWebPartProps {
   description: string;
