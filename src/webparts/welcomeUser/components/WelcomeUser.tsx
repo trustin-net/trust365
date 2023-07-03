@@ -5,8 +5,9 @@ import { escape } from '@microsoft/sp-lodash-subset';
 export type WelcomeUserProps = { welcomeMessage?: string; userDisplayName: string; }
 
 const WelcomeUser: React.FC<WelcomeUserProps> = ({ welcomeMessage = "Welcome, ", userDisplayName }) => {
-  return <section className="shadow p-4 rounded border border-primary-500/50 text-xl text-center bg-primary-50">{escape(welcomeMessage)}
-    <span className="font-bold text-primary-700">
+  // background-image: linear-gradient(to right bottom, #1c5cbf, #008cee, #00b4e1, #00d499, #22eb12);
+  return <section className="text-white text-center p-4 text-xl bg-gradient-to-r from-[#F1B083] from-10% via-[#E38D99] via-30% to-[#3E3FAF]">{escape(welcomeMessage)}
+    <span className="font-bold">
       {escape(userDisplayName)}
     </span>
   </section>
