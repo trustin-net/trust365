@@ -3,26 +3,37 @@
   "id": "11155215-1529-492a-83db-4b5b05c7506e",
   "alias": "WelcomeUserWebPart",
   "componentType": "WebPart",
-
   // The "*" signifies that the version should be taken from the package.json
   "version": "*",
   "manifestVersion": 2,
-
   // If true, the component can only be installed on sites where Custom Script is allowed.
   // Components that allow authors to embed arbitrary script code should set this to true.
   // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
   "requiresCustomScript": false,
-  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
   "supportsThemeVariants": true,
-
-  "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
-    "group": { "default": "Advanced" },
-    "title": { "default": "WelcomeUser" },
-    "description": { "default": "WelcomeUser description" },
-    "officeFabricIconFontName": "Page",
-    "properties": {
-      "description": "WelcomeUser"
+  "supportsFullBleed": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Welcome User"
+      },
+      "description": {
+        "default": "Welcome User description"
+      },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "welcomeMessage": "Welcome, "
+      }
     }
-  }]
+  ]
 }

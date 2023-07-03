@@ -1,17 +1,29 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
 	"name": "Trust365",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"forwardPorts": [
+		4321,
+		35729
+	],
+	"portsAttributes": {
+		"4321": {
+			"label": "Server",
+			"protocol": "https"
+		},
+		"35729": {
+			"label": "LiveReload",
+			"protocol": "https"
+		}
+	},
+	"containerUser": "node",
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-16-bookworm",
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install gulp-cli yo @microsoft/generator-sharepoint --global"
-	// Configure tool-specific properties.
-	// "customizations": {},
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"postCreateCommand": "bash ./.devcontainer/post-create-command.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bradlc.vscode-tailwindcss",
+				"esbenp.prettier-vscode",
+				"ms-vscode.azure-account"
+			]
+		}
+	}
 }
