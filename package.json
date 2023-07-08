@@ -12,7 +12,8 @@
     "test": "gulp test",
     "serve": "gulp serve",
     "bundle": "gulp bundle",
-    "package": "gulp package-solution"
+    "package": "gulp package-solution",
+    "husky:install": "husky install"
   },
   "dependencies": {
     "@fluentui/react": "^7.199.1",
@@ -28,6 +29,8 @@
     "tslib": "2.3.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@microsoft/eslint-config-spfx": "1.17.4",
     "@microsoft/eslint-plugin-spfx": "1.17.4",
     "@microsoft/rush-stack-compiler-4.5": "0.5.0",
@@ -42,6 +45,7 @@
     "eslint": "8.7.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "gulp": "4.0.2",
+    "husky": "^8.0.3",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
