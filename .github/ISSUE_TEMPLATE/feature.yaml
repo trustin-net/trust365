@@ -1,0 +1,18 @@
+name: 🚀 Feature request
+description: Request a change that is not a bug fix
+title: "[Feature] <title>"
+labels: [feature, triage]
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing feature for this?
+      description: Please search to see if an issue already exists for the feature you request.
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: textarea
+    attributes:
+      label: User Story
+      render: markdown
+    validations:
+      required: true
