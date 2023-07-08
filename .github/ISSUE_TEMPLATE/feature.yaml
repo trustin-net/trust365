@@ -12,7 +12,6 @@ body:
           required: true
   - type: textarea
     attributes:
-      label: User Story
-      render: markdown
+      label: Description
     validations:
       required: true
